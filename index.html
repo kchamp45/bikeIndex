@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- <link rel="stylesheet" href="build/css/vendor.css"> -->
 
-    <!-- <script src="build/js/vendor.min.js"></script> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"> -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="build/css/vendor.css">
+    <script src="build/js/vendor.min.js"></script>
+
     <link href="/css/main.css" rel="stylesheet" type="text/css">
-    <script
+    <!-- <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous"></script> -->
+
     <script type="text/javascript" src="build/js/app.js"></script>
     <title>Bike Index</title>
   </head>
@@ -36,25 +39,34 @@
       <div class="well">
         <h3>Compare thefts of two bike manufacturers over the past year:</h3>
         <form id="stats-form">
-          <label for="theft-location">Enter a 5-digit zip code: </label>
-          <input type="text" name="theft-location" maxlength="5" minlength="5">
-          <label for="serial number">Enter the manufacturer:</label>
-          <input type="text" name="manufacturer" id="manu1"></input>
-          <input type="text" name="manufacturer" id="manu2"></input>
-          <!-- <label for="timeFrame" name="duration" id="time"></label>
-          <select>
-            <option>in the last 6 months ago</option>
-            <option>in the last year</option>
-            <option>in the last two years</option>
-          </select> -->
+          <div class="form-group">
+            <label for="theft-location">Enter a 5-digit zip code: </label>
+            <input type="text" name="theft-location" id="theft-location" maxlength="5" minlength="5">
+          </div>
+          <div class="form-group">
+            <label for="serial number">Enter the manufacturers you want to compare:</label><br>
+            <label for="manu1">Manufacturer 1:</label>
+            <input type="text" name="manufacturer" id="manu1"></input><br>
+            <label for="manu2">Manufacturer 2:</label>
+            <input type="text" name="manufacturer" id="manu2"></input>
+          </div>
+          <div class="form-group">
+            <label for="timeFrame" name="duration" id="time">Select timeframe:</label>
+            <select id="timeFrame">
+              <option value=15770000>in the last 6 months</option>
+              <option value=3.154e7>in the last year</option>
+              <option value=6.307e7>in the last two years</option>
+            </select>
+          </div>
           <button class="btn btn-danger" type="submit" name="btn">Submit</button>
         </form>
+
         <div id="manu-result">
-          <p>Here's the information you requested</p>
-          <p>In the last <span id="period"></span> time, </p>
+          <h3>Here's the information you requested:</h3>
+          <p>In the last <span id="period"></span>, </p>
             <ul>
-              <li><span id="inputManu1"></span>: Out of <span id="manu1All"></span> bicycles registered on Bike Index, <span id="manu1Stolen"></span>have been stolen.</li>
-              <li><span id="inputManu2"></span>: Out of <span id="manu2All"></span> bicycles registered on Bike Index, <span id="manu2Stolen"></span>have been stolen.</li>
+              <li><span id="inputManu1"></span>: Out of all bicycles of that manufacturer registered on Bike Index, <span id="manu1Stolen"></span> have been stolen within 10 miles of your zip code.</li>
+              <li><span id="inputManu2"></span>: Out of all bicycles of that manufacturer registered on Bike Index, <span id="manu2Stolen"></span> have been stolen within 10 miles of your zip code.</li>
             </ul>
           </p>
         </div>

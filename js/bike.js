@@ -10,7 +10,6 @@ export let Bike = {
       success: (response) => {
         console.log("bikes length: " + response.bikes.length);
         this.displayStatus(response, display);
-
       },
       error: function() {
         $('#error').text('Something is wrong.  Try again.');
@@ -39,8 +38,45 @@ export let Bike = {
         console.log("Year " + selectedBike.year + " " + selectedBike.stolen);
       });
       display(selectedBike);
+  },
+
+  getManufacturer: function(manu, zip, dateparam, displayManus){
+    $.ajax({
+      url:  `https://bikeindex.org:443/api/v3/search?page=1&per_page=25&manufacturer=${manu}&location=${zip}&distance=10&stolenness=proximity`,
+      type: "GET",
+      data: {
+        format: "json"
+      },
+      success: (response) => {
+        this.dateSort(manu, response, dateparam, displayManus);
+      },
+      error: function() {
+        alert("getManufacturer error");
+      }
+    });
+  },
+
+  dateSort: function(manu, response, dateparam, displayManus){
+    console.log("dateSort activate");
+    let bikesStolen = [];
+    let nowDay = new Date();
+    let now = nowDay.getSeconds();
+    let cutoff = now - dateparam;
+    // console.log("now: " + now);
+    console.log("dateparam: " + dateparam);
+    console.log("cutoff: " + cutoff);
+    response.bikes.forEach(function(bike) {
+      if(bike.date_stolen > cutoff){
+        bikesStolen.push(bike);
+      }
+    });
+    let totalStolen = bikesStolen.length;
+    console.log("bikesStolen length: " + totalStolen);
+    displayManus(manu, totalStolen);
   }
 };
+
+
     // $("#bike-serial").text(serialNum);
   //   if (response.body.bikes.stolen === false){
   //     $("#notStolen").text("not");
