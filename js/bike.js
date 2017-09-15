@@ -60,8 +60,9 @@ export let Bike = {
     console.log("dateSort activate");
     let bikesStolen = [];
     let nowDay = new Date();
-    let now = nowDay.getSeconds();
-    let cutoff = now - dateparam;
+    let now = nowDay.getTime();
+    let nowSec = now / 1000;
+    let cutoff = nowSec - dateparam;
     // console.log("now: " + now);
     console.log("dateparam: " + dateparam);
     console.log("cutoff: " + cutoff);

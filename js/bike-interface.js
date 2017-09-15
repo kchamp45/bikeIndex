@@ -1,5 +1,5 @@
 
-var apiKey = require('./../.env').apiKey;
+// var apiKey = require('./../.env').apiKey;
 
 import { Bike } from './../js/bike.js';
 
